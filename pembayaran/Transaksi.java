@@ -1,14 +1,21 @@
 package pembayaran;
 
 import java.util.Scanner;
-
 import pembayaran.MetodePembayaran;
+import data.Pelanggan;
 
 public class Transaksi {
     protected MetodePembayaran metode;
 
-    public Transaksi() {
-        this.metode = new MetodePembayaran();
+    int nomorRekening = 0;
+
+    public void CariPelanggan(String IDPelanggan) {
+        for (Pelanggan pelanggan : Pelanggan.getDummyData()) {
+            if (pelanggan.getId().equalsIgnoreCase(IDPelanggan)) {
+                nomorRekening = pelanggan.getNomorRekening();
+                return;
+            }
+        }
     }
 
     public void prosesTransaksi(double totalBelanja) {
@@ -30,15 +37,17 @@ public class Transaksi {
 
         switch (pilihMetode) {
             case 1:
-                metode.KartuDebit(totalBelanja);
+                MetodePembayaran Debit = new KartuDebit();
+                Debit.metodePembayaran(totalBelanja, nomorRekening);
+                // metode.KartuDebit(totalBelanja);
                 break;
             case 2:
-                metode.EWallet(totalBelanja);
+                // metode.EWallet(totalBelanja);
                 break;
             case 3:
                 System.out.print("Masukkan uang tunai yang diberikan: ");
                 double uangTunai = input.nextDouble();
-                metode.Tunai(totalBelanja, uangTunai);
+                // metode.Tunai(totalBelanja, uangTunai);
                 break;
             default:
                 System.out.println("Metode tidak valid");
