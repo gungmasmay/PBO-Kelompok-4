@@ -1,30 +1,22 @@
 package data;
 
 public class Pesanan {
-    private Barang barang;   
+    // 1. WADAH: Variabel untuk menyimpan satu objek Barang dan jumlahnya
+    private Barang barang;    
     private int jumlah;
 
+    // 2. PINTU MASUK: Konstruktor yang dipanggil oleh 'new Pesanan(...)' di file main
     public Pesanan(Barang barang, int jumlah) {
         this.barang = barang;
         this.jumlah = jumlah;
     }
 
+    // 3. PINTU KELUAR: Getter untuk mengambil kembali data yang sudah tersimpan
     public Barang getBarang() {
         return this.barang;
     }
 
     public int getJumlah() {
         return this.jumlah;
-    }
-
-    public static Pesanan[] getDummyData() {
-        Barang[] daftarBarang = Barang.getDummyData();
-        return new Pesanan[] {
-            new Pesanan(daftarBarang[0], 2),
-            new Pesanan(daftarBarang[1], 1),
-            new Pesanan(daftarBarang[2], 3),
-            new Pesanan(daftarBarang[3], 1),
-            new Pesanan(daftarBarang[4], 5)
-        };
     }
 }

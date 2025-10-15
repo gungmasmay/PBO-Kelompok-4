@@ -5,6 +5,7 @@ import pembayaran.Transaksi;
 import data.Barang;
 import data.Pelanggan;
 import data.Pesanan;
+import pembayaran.Struk;
 
 public class Kasir {
 
@@ -20,6 +21,8 @@ public class Kasir {
 
         Pelanggan[] daftarPelanggan = Pelanggan.getDummyData();
         Barang[] daftarBarang = Barang.getDummyData();
+        Pesanan[] daftarPesanan = new Pesanan[100];
+        // Pesanan[] daftarPesanan = Pesanan.getDummyData();
 
         double totalBelanja = 0;
         int pilihan;
@@ -35,7 +38,6 @@ public class Kasir {
         }
         
         do {
-
             System.out.println("\n=============================");
             System.out.println("Halo, " + namaPelanggan);
             System.out.println("1. Tambah Barang");
@@ -72,25 +74,23 @@ public class Kasir {
                         if (kodeBarang.equals("0")) 
                         {
                             top = false;
-                            break; // keluar dari while
+                            break;
                         }
 
-                        // Cari barang yang cocok
                         Barang barangDipilih = null;
                         for (Barang b : daftarBarang) 
                         {
                             if (b.getKode().equalsIgnoreCase(kodeBarang)) 
                             {
                                 barangDipilih = b;
+                                Pesanan pesananBaru = new Pesanan(barangDipilih, jumlah);
                                 break;
                             }
-                        }
-
-                        if (barangDipilih != null) 
+                            if (barangDipilih != null) 
                         {
                             System.out.print("Masukkan jumlah: ");
                             int jumlah = input.nextInt();
-                            input.nextLine(); // clear buffer
+                            input.nextLine();
 
                             if (jumlah > 0) 
                             {
@@ -105,6 +105,7 @@ public class Kasir {
                                 System.out.println("Jumlah harus lebih dari 0.");
                             }
                         } 
+                        }
                         else 
                         {
                             System.out.println("Kode barang tidak ditemukan.");
@@ -114,8 +115,9 @@ public class Kasir {
 
                 case 2:
                     if (totalBelanja > 0) {
-                        transaksi.prosesTransaksi(totalBelanja);
-                        transaksi.CariPelanggan(IDPelanggan);
+                        transaksi.prosesTransaksi(totalBelanja, IDPelanggan);
+                        Struk struk = new Struk();
+                        struk.cetakStruk(daftarPesanan);  
                         totalBelanja = 0;
                     } else {
                         System.out.println("Belum ada barang yang ditambahkan.");

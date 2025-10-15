@@ -51,7 +51,6 @@ public class Pelanggan {
         this.saldoEwallet = saldoEwallet;
     }
 
-
     public static Pelanggan[] getDummyData() {
         return new Pelanggan[] {
             new Pelanggan("P001", "Andi Saputra", "081234567890", "1234567890", 2000000, 500000),
