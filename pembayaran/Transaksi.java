@@ -28,7 +28,8 @@ public class Transaksi {
         Scanner input = new Scanner(System.in);
 
         // 🧾 Menu pilih metode pembayaran
-        System.out.println("\n=== PILIH METODE PEMBAYARAN ===");
+        System
+        .out.println("\n=== PILIH METODE PEMBAYARAN ===");
         System.out.println("1. Kartu Debit");
         System.out.println("2. E-Wallet");
         System.out.println("3. Tunai");
@@ -41,18 +42,18 @@ public class Transaksi {
                 Pembayaran Debit = new KartuDebit();
                 Debit.metodePembayaran(totalBelanja, nomorRekening);
                 // metode.KartuDebit(totalBelanja);
-                break;
+            break;
             case 2:
                 // metode.EWallet(totalBelanja);
-                break;
+            break;
             case 3:
-                System.out.print("Masukkan uang tunai yang diberikan: ");
-                double uangTunai = input.nextDouble();
+                // System.out.print("Masukkan uang tunai yang diberikan: ");
+                // double uangTunai = input.nextDouble();
                 // metode.Tunai(totalBelanja, uangTunai);
-                break;
+            break;
             default:
                 System.out.println("Metode tidak valid");
-                return;
+            return;
         }
 
         // boolean sukses = metode.bayar(totalBelanja);

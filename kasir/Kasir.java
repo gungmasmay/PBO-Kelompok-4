@@ -115,6 +115,7 @@ public class Kasir {
                 case 2:
                     if (totalBelanja > 0) {
                         transaksi.prosesTransaksi(totalBelanja);
+                        transaksi.CariPelanggan(IDPelanggan);
                         totalBelanja = 0;
                     } else {
                         System.out.println("Belum ada barang yang ditambahkan.");
