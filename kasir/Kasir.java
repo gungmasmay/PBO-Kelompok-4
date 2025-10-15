@@ -1,5 +1,7 @@
 package kasir;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import pembayaran.Transaksi;
 import data.Barang;
@@ -13,29 +15,32 @@ public class Kasir {
         Scanner input = new Scanner(System.in);
         Transaksi transaksi = new Transaksi();
 
+        List<Pesanan> daftarPesanan = new ArrayList<>();
+        int jumlahPesanan = 0;
+
         System.out.println("=== SISTEM KASIR ===");
         System.out.print("Masukkan ID Pelanggan (ex: P001): ");
         String IDPelanggan = input.nextLine();
 
-        //error handling cek id pelanggan 
-
         Pelanggan[] daftarPelanggan = Pelanggan.getDummyData();
         Barang[] daftarBarang = Barang.getDummyData();
-        Pesanan[] daftarPesanan = Pesanan.getDummyData();
 
         double totalBelanja = 0;
         int pilihan;
         String namaPelanggan = null;
 
-        for(Pelanggan pelanggan : daftarPelanggan) 
-        {
-            if (pelanggan.getId().equalsIgnoreCase(IDPelanggan)) 
-            {
+        for (Pelanggan pelanggan : daftarPelanggan) {
+            if (pelanggan.getId().equalsIgnoreCase(IDPelanggan)) {
                 namaPelanggan = pelanggan.getNama();
                 break;
             }
         }
-        
+
+        if (namaPelanggan == null) {
+            System.out.println("ID Pelanggan tidak ditemukan. Program berhenti.");
+            return;
+        }
+
         do {
             System.out.println("\n=============================");
             System.out.println("Halo, " + namaPelanggan);
@@ -47,22 +52,19 @@ public class Kasir {
             pilihan = input.nextInt();
             input.nextLine();
 
-            switch (pilihan) 
-            {
+            switch (pilihan) {
                 case 1:
                     boolean top = true;
-
-                    while (top) 
-                    {
+                    while (top) {
                         System.out.println("=========================================================");
                         System.out.println("|\t\t\tPILIHAN MENU\t\t\t|");
                         System.out.println("=========================================================");
                         System.out.println("| Kode\t| Nama Menu\t\t\t| Harga\t\t|");
                         System.out.println("---------------------------------------------------------");
-                        
-                        for (Barang barang : daftarBarang) 
-                        {
-                            System.out.printf("| %s\t| %-25s\t| Rp %,10.0f |\n", barang.getKode(), barang.getNama(), barang.getHarga());
+
+                        for (Barang barang : daftarBarang) {
+                            System.out.printf("| %s\t| %-25s\t| Rp %,10.0f |\n",
+                                    barang.getKode(), barang.getNama(), barang.getHarga());
                         }
                         System.out.println("=========================================================");
 
@@ -70,43 +72,37 @@ public class Kasir {
                         System.out.print("\nMasukkan kode barang: ");
                         String kodeBarang = input.nextLine();
 
-                        if (kodeBarang.equals("0")) 
-                        {
+                        if (kodeBarang.equals("0")) {
                             top = false;
                             break;
                         }
 
                         Barang barangDipilih = null;
-                        for (Barang b : daftarBarang) 
-                        {
-                            if (b.getKode().equalsIgnoreCase(kodeBarang)) 
-                            {
+                        for (Barang b : daftarBarang) {
+                            if (b.getKode().equalsIgnoreCase(kodeBarang)) {
                                 barangDipilih = b;
                                 break;
                             }
                         }
 
-                        if (barangDipilih != null) 
-                        {
+                        if (barangDipilih != null) {
                             System.out.print("Masukkan jumlah: ");
                             int jumlah = input.nextInt();
                             input.nextLine();
 
-                            if (jumlah > 0) 
-                            {
+                            if (jumlah > 0) {
                                 double subtotal = barangDipilih.getHarga() * jumlah;
                                 totalBelanja += subtotal;
+
+                                daftarPesanan.add(new Pesanan(barangDipilih, jumlah));
+
                                 System.out.println("Ditambahkan: " + barangDipilih.getNama() + " x" + jumlah);
                                 System.out.println("Subtotal barang ini: Rp " + subtotal);
                                 System.out.println("Total sementara: Rp " + totalBelanja);
-                            } 
-                            else 
-                            {
+                            } else {
                                 System.out.println("Jumlah harus lebih dari 0.");
                             }
-                        } 
-                        else 
-                        {
+                        } else {
                             System.out.println("Kode barang tidak ditemukan.");
                         }
                     }
@@ -114,10 +110,14 @@ public class Kasir {
 
                 case 2:
                     if (totalBelanja > 0) {
+
                         transaksi.prosesTransaksi(totalBelanja, IDPelanggan);
+
                         Struk struk = new Struk();
-                        struk.cetakStruk();  
+                        struk.cetakStruk(daftarPesanan, totalBelanja);
                         totalBelanja = 0;
+                        jumlahPesanan = 0;
+                        daftarPesanan.clear();
                     } else {
                         System.out.println("Belum ada barang yang ditambahkan.");
                     }
