@@ -5,7 +5,6 @@ public class Pesanan {
     private Barang barang;    
     private int jumlah;
 
-    // 2. PINTU MASUK: Konstruktor yang dipanggil oleh 'new Pesanan(...)' di file main
     public Pesanan(Barang barang, int jumlah) {
         this.barang = barang;
         this.jumlah = jumlah;

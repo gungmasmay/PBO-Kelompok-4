@@ -46,9 +46,8 @@ public class Transaksi {
                 Ewallet.metodePembayaran(totalBelanja, nomorHP);
                 break;
             case 3:
-                // System.out.print("Masukkan uang tunai yang diberikan: ");
-                // double uangTunai = input.nextDouble();
-                // metode.Tunai(totalBelanja, uangTunai);
+                Pembayaran pembayaranTunai = new Tunai();
+                pembayaranTunai.metodePembayaran(totalBelanja, null);
             break;
             default:
                 System.out.println("Metode tidak valid");
@@ -56,6 +55,5 @@ public class Transaksi {
         }
 
         System.out.println("Kembali ke menu utama...");
-        input.close();
         }
     }
