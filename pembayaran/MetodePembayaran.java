@@ -33,8 +33,8 @@ class EWallet extends Pembayaran
     {
         for (Pelanggan pelanggan : Pelanggan.getDummyData()) {
             if (pelanggan.getNomorHP().equals(NomorHP)) {
-                if (pelanggan.getSaldoEWallet() >= totalBelanja) {
-                    pelanggan.setSaldoEWallet(pelanggan.getSaldoEWallet() - totalBelanja);
+                if (pelanggan.getSaldoEwallet() >= totalBelanja) {
+                    pelanggan.setSaldoEwallet(pelanggan.getSaldoEwallet() - totalBelanja);
                     System.out.println("✅ Pembayaran berhasil. Sisa saldo e-wallet: Rp " + pelanggan.getSaldoEwallet());
                 } else {
                     System.out.println("❌ Saldo debit tidak mencukupi.");

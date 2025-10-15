@@ -11,6 +11,7 @@ public class Barang {
         this.harga = harga;
     }
 
+    
     public String getKode() {
         return kode;
     }
@@ -50,3 +51,4 @@ public class Barang {
         };
     }
 }
+

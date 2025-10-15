@@ -4,6 +4,7 @@ import java.util.Scanner;
 import pembayaran.Transaksi;
 import data.Barang;
 import data.Pelanggan;
+import data.Pesanan;
 
 public class Kasir {
 

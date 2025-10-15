@@ -1,14 +1,14 @@
 package pembayaran;
 
 import java.util.Scanner;
-import pembayaran.MetodePembayaran;
 import data.Pelanggan;
+import data.Pesanan;
 
 public class Transaksi {
-    protected MetodePembayaran metode;
+    // protected MetodePembayaran metode;
 
-    int nomorRekening = 0;
-
+    String nomorRekening = null;
+    
     public void CariPelanggan(String IDPelanggan) {
         for (Pelanggan pelanggan : Pelanggan.getDummyData()) {
             if (pelanggan.getId().equalsIgnoreCase(IDPelanggan)) {
@@ -17,6 +17,7 @@ public class Transaksi {
             }
         }
     }
+
 
     public void prosesTransaksi(double totalBelanja) {
         if (totalBelanja == 0) {
@@ -37,7 +38,7 @@ public class Transaksi {
 
         switch (pilihMetode) {
             case 1:
-                MetodePembayaran Debit = new KartuDebit();
+                Pembayaran Debit = new KartuDebit();
                 Debit.metodePembayaran(totalBelanja, nomorRekening);
                 // metode.KartuDebit(totalBelanja);
                 break;

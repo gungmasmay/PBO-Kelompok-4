@@ -17,6 +17,7 @@ public class Pelanggan {
         this.saldoEwallet = saldoEwallet;
     }
 
+
     // Getter
     public String getId() {
         return id;
