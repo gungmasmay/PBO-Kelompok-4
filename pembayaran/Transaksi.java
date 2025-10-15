@@ -1,5 +1,6 @@
 package pembayaran;
 
+import java.util.List;
 import java.util.Scanner;
 import data.Pelanggan;
 import data.Pesanan;
@@ -10,7 +11,7 @@ public class Transaksi {
     String nomorRekening = null;
     String nomorHP = null;
 
-    public void prosesTransaksi(double totalBelanja, String IDPelanggan) {
+    public void prosesTransaksi(double totalBelanja, String IDPelanggan, List<Pesanan> daftarPesanan) {
         if (totalBelanja == 0) {
             System.out.println("Belum ada barang. Tambahkan barang terlebih dahulu!");
             return;
@@ -38,24 +39,22 @@ public class Transaksi {
             case 1:
                 System.out.println("Nomor Rekening: " + nomorRekening);
                 Pembayaran Debit = new KartuDebit();
-                Debit.metodePembayaran(totalBelanja, nomorRekening);
+                Debit.metodePembayaran(totalBelanja, nomorRekening, daftarPesanan);
                 break;
             case 2:
                 System.out.println("Nomor HP: " + nomorHP);
                 Pembayaran Ewallet = new EWallet();
-                Ewallet.metodePembayaran(totalBelanja, nomorHP);
+                Ewallet.metodePembayaran(totalBelanja, nomorHP, daftarPesanan);
                 break;
             case 3:
-                System.out.print("Masukkan uang tunai yang diberikan: ");
-                double uangTunai = input.nextDouble();
-                // metode.Tunai(totalBelanja, uangTunai);
-                break;
+                Pembayaran pembayaranTunai = new Tunai();
+                pembayaranTunai.metodePembayaran(totalBelanja, null, daftarPesanan);
+            break;
             default:
                 System.out.println("Metode tidak valid");
                 break;
         }
 
         System.out.println("Kembali ke menu utama...");
-        input.close();
         }
     }
