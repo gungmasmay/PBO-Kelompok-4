@@ -2,13 +2,20 @@ package pembayaran;
 
 import java.util.Scanner;
 
-import pembayaran.MetodePembayaran;
+import data.Pelanggan;
 
 public class Transaksi {
-    protected MetodePembayaran metode;
 
-    public Transaksi() {
-        this.metode = new MetodePembayaran();
+
+    String nomorRekening = "";
+
+    public void CariPelanggan(String IDPelanggan) {
+        for (Pelanggan pelanggan : Pelanggan.getDummyData()) {
+            if (pelanggan.getId().equalsIgnoreCase(IDPelanggan)) {
+                nomorRekening = pelanggan.getNomorRekening();
+                return;
+            }
+        }
     }
 
     public void prosesTransaksi(double totalBelanja) {
@@ -30,15 +37,18 @@ public class Transaksi {
 
         switch (pilihMetode) {
             case 1:
-                metode.KartuDebit(totalBelanja);
+                System.out.println("Masukan Rekening ");
+                KartuDebit Debit = new KartuDebit();
+                Debit.metodePembayaran(totalBelanja, nomorRekening);
+                // metode.KartuDebit(totalBelanja);
                 break;
             case 2:
-                metode.EWallet(totalBelanja);
+                // metode.EWallet(totalBelanja);
                 break;
             case 3:
                 System.out.print("Masukkan uang tunai yang diberikan: ");
                 double uangTunai = input.nextDouble();
-                metode.Tunai(totalBelanja, uangTunai);
+                // metode.Tunai(totalBelanja, uangTunai);
                 break;
             default:
                 System.out.println("Metode tidak valid");
@@ -53,5 +63,6 @@ public class Transaksi {
         // }
 
         System.out.println("Kembali ke menu utama...");
+        input.close();
     }
     }

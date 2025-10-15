@@ -53,8 +53,8 @@ public class Pelanggan {
     public static Pelanggan[] getDummyData() {
         return new Pelanggan[] {
             new Pelanggan("P001", "Andi Saputra", "081234567890", "1234567890", 2000000, 500000),
-            new Pelanggan("P002", "Budi Santoso", "082345678901", "9876543210", 1_500000, 300000),
-            new Pelanggan("P003", "Citra Dewi", "083456789012", "1122334455", 5000000, 1200000),
+            new Pelanggan("P002", "Budi Santoso", "082345678901", "9876543210", 1500000, 300000),
+            new Pelanggan("P003", "Citra Dewi", "083456789012", "1122334455", 5000000, 1_200000),
             new Pelanggan("P004", "Dewi Lestari", "084567890123", "5566778899", 750000, 150000),
             new Pelanggan("P005", "Eko Prasetyo", "085678901234", "6677889900", 3000000, 2000000),
         };
