@@ -19,6 +19,6 @@ public class Struk {
             barang.getHarga() * pesanan.getJumlah());
     }
     System.out.println("--------------------------------------------------");
-    System.out.println("Total: Rp " + totalBelanja);
+    System.out.println("Total: Rp " + totalBelanja + "\n");
 }
 }
