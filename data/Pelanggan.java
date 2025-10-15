@@ -17,6 +17,8 @@ public class Pelanggan {
         this.saldoEwallet = saldoEwallet;
     }
 
+
+    // Getter
     public String getId() {
         return id;
     }
@@ -48,7 +50,6 @@ public class Pelanggan {
     public void setSaldoEwallet(double saldoEwallet) {
         this.saldoEwallet = saldoEwallet;
     }
-
 
     public static Pelanggan[] getDummyData() {
         return new Pelanggan[] {

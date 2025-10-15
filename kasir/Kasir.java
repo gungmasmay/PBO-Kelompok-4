@@ -4,6 +4,8 @@ import java.util.Scanner;
 import pembayaran.Transaksi;
 import data.Barang;
 import data.Pelanggan;
+import data.Pesanan;
+import pembayaran.Struk;
 
 public class Kasir {
 
@@ -19,6 +21,7 @@ public class Kasir {
 
         Pelanggan[] daftarPelanggan = Pelanggan.getDummyData();
         Barang[] daftarBarang = Barang.getDummyData();
+        Pesanan[] daftarPesanan = Pesanan.getDummyData();
 
         double totalBelanja = 0;
         int pilihan;
@@ -34,7 +37,6 @@ public class Kasir {
         }
         
         do {
-
             System.out.println("\n=============================");
             System.out.println("Halo, " + namaPelanggan);
             System.out.println("1. Tambah Barang");
@@ -71,7 +73,7 @@ public class Kasir {
                         if (kodeBarang.equals("0")) 
                         {
                             top = false;
-                            break; // keluar dari while
+                            break;
                         }
 
                         Barang barangDipilih = null;
@@ -112,7 +114,9 @@ public class Kasir {
 
                 case 2:
                     if (totalBelanja > 0) {
-                        transaksi.prosesTransaksi(totalBelanja);
+                        transaksi.prosesTransaksi(totalBelanja, IDPelanggan);
+                        Struk struk = new Struk();
+                        struk.cetakStruk();  
                         totalBelanja = 0;
                     } else {
                         System.out.println("Belum ada barang yang ditambahkan.");

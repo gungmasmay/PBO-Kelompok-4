@@ -16,9 +16,9 @@ class KartuDebit extends Pembayaran
             if (pelanggan.getNomorRekening().equals(nomorRekening)) {
                 if (pelanggan.getSaldoDebit() >= totalBelanja) {
                     pelanggan.setSaldoDebit(pelanggan.getSaldoDebit() - totalBelanja);
-                    System.out.println("✅ Pembayaran berhasil. Sisa saldo debit: Rp " + pelanggan.getSaldoDebit());
+                    System.out.println("Pembayaran berhasil. Sisa saldo debit: Rp " + pelanggan.getSaldoDebit());
                 } else {
-                    System.out.println("❌ Saldo debit tidak mencukupi.");
+                    System.out.println("Saldo debit tidak mencukupi.");
                 }
                 return;
             }

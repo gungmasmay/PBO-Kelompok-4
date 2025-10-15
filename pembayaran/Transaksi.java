@@ -1,32 +1,31 @@
 package pembayaran;
 
 import java.util.Scanner;
-
 import data.Pelanggan;
+import data.Pesanan;
 
 public class Transaksi {
+    // protected MetodePembayaran metode;
 
+    String nomorRekening = null;
+    String nomorHP = null;
 
-    String nomorRekening = "";
-
-    public void CariPelanggan(String IDPelanggan) {
-        for (Pelanggan pelanggan : Pelanggan.getDummyData()) {
-            if (pelanggan.getId().equalsIgnoreCase(IDPelanggan)) {
-                nomorRekening = pelanggan.getNomorRekening();
-                return;
-            }
-        }
-    }
-
-    public void prosesTransaksi(double totalBelanja) {
+    public void prosesTransaksi(double totalBelanja, String IDPelanggan) {
         if (totalBelanja == 0) {
             System.out.println("Belum ada barang. Tambahkan barang terlebih dahulu!");
             return;
         }
 
+        for (Pelanggan pelanggan : Pelanggan.getDummyData()) {
+            if (pelanggan.getId().equalsIgnoreCase(IDPelanggan)) {
+                nomorRekening = pelanggan.getNomorRekening();
+                nomorHP = pelanggan.getNomorHP();
+                break;
+            }
+        }
+
         Scanner input = new Scanner(System.in);
 
-        // 🧾 Menu pilih metode pembayaran
         System.out.println("\n=== PILIH METODE PEMBAYARAN ===");
         System.out.println("1. Kartu Debit");
         System.out.println("2. E-Wallet");
@@ -37,13 +36,14 @@ public class Transaksi {
 
         switch (pilihMetode) {
             case 1:
-                System.out.println("Masukan Rekening ");
-                KartuDebit Debit = new KartuDebit();
+                System.out.println("Nomor Rekening: " + nomorRekening);
+                Pembayaran Debit = new KartuDebit();
                 Debit.metodePembayaran(totalBelanja, nomorRekening);
-                // metode.KartuDebit(totalBelanja);
                 break;
             case 2:
-                // metode.EWallet(totalBelanja);
+                System.out.println("Nomor HP: " + nomorHP);
+                Pembayaran Ewallet = new EWallet();
+                Ewallet.metodePembayaran(totalBelanja, nomorHP);
                 break;
             case 3:
                 System.out.print("Masukkan uang tunai yang diberikan: ");
@@ -52,17 +52,10 @@ public class Transaksi {
                 break;
             default:
                 System.out.println("Metode tidak valid");
-                return;
+                break;
         }
-
-        // boolean sukses = metode.bayar(totalBelanja);
-        // if (sukses) {
-        //     System.out.println("✅ Transaksi berhasil untuk " + metode.getNamaPelanggan());
-        // } else {
-        //     System.out.println("❌ Transaksi gagal. Silakan coba lagi.");
-        // }
 
         System.out.println("Kembali ke menu utama...");
         input.close();
-    }
+        }
     }
