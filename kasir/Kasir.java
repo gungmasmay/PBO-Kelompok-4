@@ -40,13 +40,11 @@ public class Kasir {
                         System.out.print("\nMasukkan kode barang: ");
                         String kodeBarang = input.nextLine();
 
-                        // ✅ Cek dulu apakah user mau kembali
                         if (kodeBarang.equals("0")) {
                             top = false;
                             break; // keluar dari while
                         }
 
-                        // Cari barang yang cocok
                         Barang barangDipilih = null;
                         for (Barang b : daftarBarang) {
                             if (b.getKode().equalsIgnoreCase(kodeBarang)) {
@@ -58,7 +56,7 @@ public class Kasir {
                         if (barangDipilih != null) {
                             System.out.print("Masukkan jumlah: ");
                             int jumlah = input.nextInt();
-                            input.nextLine(); // clear buffer
+                            input.nextLine();
 
                             if (jumlah > 0) {
                                 double subtotal = barangDipilih.getHarga() * jumlah;
